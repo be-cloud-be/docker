@@ -3,12 +3,12 @@
 set -e
 
 # parse DATABASE_URL if present and set environment
-regex="^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$"
-[[ $DATABASE_URL =~ $regex ]]
-export HOST=${BASH_REMATCH[3]}:${BASH_REMATCH[4]}
-export NAME=${BASH_REMATCH[5]}
-export USER=${BASH_REMATCH[1]}
-export PASSWORD=${BASH_REMATCH[2]}
+#regex="^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$"
+#[[ $DATABASE_URL =~ $regex ]]
+#export HOST=${BASH_REMATCH[3]}:${BASH_REMATCH[4]}
+#export NAME=${BASH_REMATCH[5]}
+#export USER=${BASH_REMATCH[1]}
+#export PASSWORD=${BASH_REMATCH[2]}
 
 # set the postgres database host, port, user and password according to the environment
 # and pass them as arguments to the odoo process if not present in the config file
