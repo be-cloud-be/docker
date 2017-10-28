@@ -3,7 +3,7 @@
 set -e
 
 # parse DATABASE_URL if present and set environment
-regex="^postgres://([a-zA-Z_-]):([a-zA-Z])@([a-z-]):([[:digit:]])/([a-zA-Z_-]*)$"
+regex="^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$"
 [[ $DATABASE_URL =~ $regex ]]
 export HOST=${BASH_REMATCH[3]}:${BASH_REMATCH[4]}
 export NAME=${BASH_REMATCH[5]}
