@@ -31,7 +31,7 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
-COPY ./patches/* /tmp
+COPY ./patches/0001-allow-postgres-user-in-db.patch /tmp
 
 # Patch Odoo to allow postgres user
 RUN set -x; \
