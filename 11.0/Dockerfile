@@ -40,6 +40,9 @@ RUN set -x; \
         && cd /usr/lib/python3/dist-packages \
         && patch -p 1 < /tmp/0001-allow-postgres-user-in-db.patch \
         && rm /tmp/0001-allow-postgres-user-in-db.patch
+        
+# Nginx configuration
+ADD nginx.conf.sigil .
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
