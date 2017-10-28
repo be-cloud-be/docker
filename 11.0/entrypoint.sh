@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 # parse DATABASE_URL if present and set environment
 regex="^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$"
 [[ ${DATABASE_URL} =~ $regex ]]
@@ -11,12 +9,18 @@ export NAME=${BASH_REMATCH[5]}
 export USER=${BASH_REMATCH[1]}
 export PASSWORD=${BASH_REMATCH[2]}
 
+echo "STEP 1"
+printenv
+
 # set the postgres database host, port, user and password according to the environment
 # and pass them as arguments to the odoo process if not present in the config file
 : ${HOST:=${DB_PORT_5432_TCP_ADDR:='db'}}
 : ${PORT:=${DB_PORT_5432_TCP_PORT:=5432}}
 : ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
 : ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo'}}}
+
+echo "STEP 2"
+printenv
 
 DB_ARGS=()
 function check_config() {
@@ -31,6 +35,9 @@ check_config "db_host" "$HOST"
 check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
+
+echo "STEP 3"
+printenv
 
 case "$1" in
     -- | odoo)
