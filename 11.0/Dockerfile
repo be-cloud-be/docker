@@ -37,8 +37,8 @@ COPY ./patches/0001-allow-postgres-user-in-db.patch /tmp
 RUN set -x; \
         apt-get update \
         && apt-get -y install -f patch \
-        && cd /usr/lib/python3/dist-packages \
-        && patch < /tmp/0001-allow-postgres-user-in-db.patch
+        && cd /usr/lib/python3/dist-packages #\
+        #&& patch < /tmp/0001-allow-postgres-user-in-db.patch
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
