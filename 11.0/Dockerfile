@@ -31,6 +31,15 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
+COPY ./patches/* /tmp
+
+# Patch Odoo to allow postgres user
+RUN set -x; \
+        apt-get update \
+        && apt-get -y install -f patch \
+        && cd /usr/lib/python3/dist-packages \
+        && patch < /tmp/0001-allow-postgres-user-in-db.patch
+
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
